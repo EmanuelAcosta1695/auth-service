@@ -9,6 +9,7 @@ import { RedirectAuthenticatedUser } from "./middleware/RedirectAuthenticatedUse
 import { ProtectedRoute } from "./middleware/ProtectedRoute.jsx"
 import DashboardPage from "./pages/DashboardPage.jsx"
 import { useEffect } from "react"
+import LoadingSpinner from "./components/LoadingSpinner.jsx"
 
 function App() {
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
@@ -16,6 +17,8 @@ function App() {
   useEffect(() => {
     checkAuth()
   }, [checkAuth])
+
+  if (isCheckingAuth) return <LoadingSpinner />;
   
   return (
     <div className='min-h-screen bg-gradient-to-br
