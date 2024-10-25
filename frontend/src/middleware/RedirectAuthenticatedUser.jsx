@@ -3,9 +3,9 @@ import { useAuthStore } from '../store/authStore'
 
 // Redirect authenticated users to the home page
 export const RedirectAuthenticatedUser = ({ children }) => {
-  const { isAuthenticated } = useAuthStore()
+  const { isAuthenticated, user } = useAuthStore()
 
-  if (isAuthenticated && user.isVerifed) {
+  if (isAuthenticated && user?.isVerifed) {
     return <Navigate to="/" replace />
   }
 

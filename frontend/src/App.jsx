@@ -5,7 +5,10 @@ import LoginPage from "./pages/LoginPage.jsx"
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx"
 import { Toaster } from "react-hot-toast"
 import { useAuthStore } from "./store/authStore.js"
-import { RedirectAuthenticatedUser } from "./middleware/RedirectAuthenticatedUser.js"
+import { RedirectAuthenticatedUser } from "./middleware/RedirectAuthenticatedUser.jsx"
+import { ProtectedRoute } from "./middleware/ProtectedRoute.jsx"
+import DashboardPage from "./pages/DashboardPage.jsx"
+import { useEffect } from "react"
 
 function App() {
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
@@ -40,7 +43,11 @@ function App() {
       />
 
       <Routes>
-        <Route path='/' element={"Home"}/>
+        <Route path='/' element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }/>
         <Route path='/signup' element={
           <RedirectAuthenticatedUser>
             <SignUpPage />
