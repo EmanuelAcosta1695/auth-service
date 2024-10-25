@@ -10,6 +10,8 @@ import { ProtectedRoute } from "./middleware/ProtectedRoute.jsx"
 import DashboardPage from "./pages/DashboardPage.jsx"
 import { useEffect } from "react"
 import LoadingSpinner from "./components/LoadingSpinner.jsx"
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx"
+import ResetPasswordPage from "./pages/ResetPasswordPage.jsx"
 
 function App() {
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
@@ -59,9 +61,17 @@ function App() {
         <Route path='/login' element={
           <RedirectAuthenticatedUser>
               <LoginPage />
-            </RedirectAuthenticatedUser>
+          </RedirectAuthenticatedUser>
         }/>
         <Route path='/verify-email' element={<EmailVerificationPage/>}/>
+        <Route path='/forgot-password' element={
+          <RedirectAuthenticatedUser>
+            <ForgotPasswordPage />
+          </RedirectAuthenticatedUser>}/>
+        <Route path='/reset-password/:token' element={
+          <RedirectAuthenticatedUser>
+            <ResetPasswordPage />
+          </RedirectAuthenticatedUser>}/>
       </Routes>
       <Toaster/>
     </div>

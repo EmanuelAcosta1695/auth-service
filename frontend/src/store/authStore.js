@@ -48,7 +48,6 @@ export const useAuthStore = create((set) => ({
       throw error
     }
   },
-
   logout: async () => {
     set({ isLoading: true, error: null })
     try {
